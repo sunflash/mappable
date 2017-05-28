@@ -1,0 +1,10 @@
+framework module Reflection {
+  umbrella header "Reflection.h"
+
+  export *
+  module * { export * }
+}
+
+module Reflection.Swift {
+    header "Reflection-Swift.h"
+}

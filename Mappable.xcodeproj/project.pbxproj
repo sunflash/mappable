@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2D2CE09F2E6B4E28FEF274D0 /* Pods_Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17785E6F8A927608EEC22CF /* Pods_Mappable.framework */; };
 		5FCD6B010C9D9DB584D43A65 /* Pods_MappableTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F35822DB8552F504FABCCC44 /* Pods_MappableTests.framework */; };
-		D31F61751ED9559F001A1489 /* Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31F616B1ED9559F001A1489 /* Mappable.framework */; };
 		D31F617A1ED9559F001A1489 /* MappableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31F61791ED9559F001A1489 /* MappableTests.swift */; };
 		D31F61951ED997CB001A1489 /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31F61861ED997CB001A1489 /* Dictionary+Extension.swift */; };
 		D31F61961ED997CB001A1489 /* Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31F61881ED997CB001A1489 /* Mappable.swift */; };
@@ -26,6 +25,9 @@
 		D31F61A91ED9994D001A1489 /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31F618A1ED997CB001A1489 /* JSONDecoder.swift */; };
 		D31F61AA1ED99951001A1489 /* JSONEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31F618B1ED997CB001A1489 /* JSONEncoder.swift */; };
 		D31F61AB1ED99954001A1489 /* Mappable+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31F618C1ED997CB001A1489 /* Mappable+Init.swift */; };
+		D3239D3F1EDB508C00F06B7D /* Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31F616B1ED9559F001A1489 /* Mappable.framework */; };
+		D3239D401EDB509400F06B7D /* Reflection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31F618D1ED997CB001A1489 /* Reflection.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D3239D411EDB509400F06B7D /* Reflection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31F618D1ED997CB001A1489 /* Reflection.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D2CE09F2E6B4E28FEF274D0 /* Pods_Mappable.framework in Frameworks */,
+				D3239D401EDB509400F06B7D /* Reflection.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,8 +77,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D31F61751ED9559F001A1489 /* Mappable.framework in Frameworks */,
+				D3239D3F1EDB508C00F06B7D /* Mappable.framework in Frameworks */,
 				5FCD6B010C9D9DB584D43A65 /* Pods_MappableTests.framework in Frameworks */,
+				D3239D411EDB509400F06B7D /* Reflection.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +592,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Mappable/Swift\\ 3",
+					"$(PROJECT_DIR)/Mappable/Swift\\ 3",
 				);
 				INFOPLIST_FILE = MappableTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -604,6 +609,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/Mappable/Swift\\ 3",
 					"$(PROJECT_DIR)/Mappable/Swift\\ 3",
 				);
 				INFOPLIST_FILE = MappableTests/Info.plist;

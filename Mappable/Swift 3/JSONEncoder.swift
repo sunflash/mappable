@@ -11,6 +11,7 @@ import Foundation
 #if swift(>=4)
 #elseif swift(>=3)
 
+/// `JSONEncoder` facilitates the encoding of `Encodable` values into JSON.
 public class JSONEncoder {
 
     /// The formatting of the output JSON data.
@@ -41,8 +42,15 @@ public class JSONEncoder {
         return DateEncodingStrategy.formatted(RFC3339DateFormatter)
     }()
 
+    /// Initializes `self` with default strategies.
     public init() {}
 
+    /// Encodes the given top-level value and returns its JSON representation.
+    ///
+    /// - parameter value: The value to encode.
+    /// - returns: A new `Data` value containing the encoded JSON data.
+    /// - throws: `CocoaError(.coderInvalidValue)` if a non-comforming floating-point value is encountered during encoding, and the encoding strategy is `.throw`.
+    /// - throws: An error if any value throws an error during encoding.
     public func encode<T: Mappable>(_ value: T) throws -> Data {
 
         var propertyUnwrappedDataRaw = value.propertyUnwrappedDataRaw

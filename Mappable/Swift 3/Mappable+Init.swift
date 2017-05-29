@@ -12,18 +12,27 @@ import Foundation
 #elseif swift(>=3)
 import Reflection
 
+/// Mappable protocol that provides extra functionality to mapped object.
 public protocol Mappable {
 
+    /// `Mappable` object's property value.
     var propertyValues: [String: Any] {get}
 
+    /// Init `Mappable` struct with a dictionary of json payload.
     init(dictionary: [String:Any], _ dateFormatter: DateFormatter?) throws
 
+    /// Default requirement as part of the `Mappable` protocol, it's necessary when expose `Mappable` object through SDK framework.
     init()
 }
 
-@available(swift, deprecated: 4)
 extension Mappable {
 
+    /// Init Mappable struct with a dictionary of json payload.
+    ///
+    /// - Parameters:
+    ///   - dictionary: dictionary of data from json payload
+    ///   - dateFormatter: date formatter for convert `Date String` to `Date`
+    /// - Throws: `CocoaError(.coderValueNotFound)` if value not found, `ConstructionErrors` if data can't be map to mappable struct.
     public init(dictionary: [String:Any], _ dateFormatter: DateFormatter?) throws {
 
         do {

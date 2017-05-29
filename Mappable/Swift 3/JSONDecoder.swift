@@ -15,6 +15,7 @@ extension CocoaError.Code {
     }
 }
 
+/// `JSONDecoder` facilitates the decoding of JSON into semantic `Decodable` types.
 public class JSONDecoder {
 
     /// The strategy to use for decoding `Date` values.
@@ -32,18 +33,26 @@ public class JSONDecoder {
         return DateDecodingStrategy.formatted(RFC3339DateFormatter)
     }()
 
+    /// Initializes `self` with default strategies.
     public init() {}
 
+    /// Decodes a top-level value of the given type from the given JSON representation.
+    ///
+    /// - parameter type: The type of the value to decode.
+    /// - parameter data: The data to decode from.
+    /// - returns: A value of the requested type.
+    /// - throws: `CocoaError(.coderReadCorrupt)` if values requested from the payload are corrupted, or if the given data is not valid JSON.
+    /// - throws: An error if any value throws an error during decoding.
     public func decode<T: Mappable>(_ type: T.Type, from data: Data) throws -> T {
 
         guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) else {
             logCoder(.JSONDecode, "json data is invalid")
-            throw CocoaError(.coderValueNotFound)
+            throw CocoaError(.coderReadCorrupt)
         }
 
         guard let jsonDict = json as? [String:Any] else {
-            logCoder(.JSONDecode, "json object is not dicationary")
-            throw CocoaError(.coderInvalidValue)
+            logCoder(.JSONDecode, "json object is not dictionary")
+            throw CocoaError(.coderReadCorrupt)
         }
 
         switch dateDecodingStrategy {

@@ -4,12 +4,28 @@ import Foundation
 #elseif swift(>=3)
 
 extension CocoaError.Code {
+    /// Thrown when a value is corrupt or contain data in wrong format
+    /// - Note: Emulated system error code when it's unavaiable for iOS 8.
+    @available(iOS, introduced: 8.0, deprecated: 8.5)
+    public static var coderReadCorrupt: CocoaError.Code {
+        return CocoaError.Code(rawValue: 4864)
+    }
+
+    /// Thrown when a value is not found
+    /// - Note: Emulated system error code when it's unavaiable for iOS 8.
+    @available(iOS, introduced: 8.0, deprecated: 8.5)
+    public static var coderValueNotFound: CocoaError.Code {
+        return CocoaError.Code(rawValue: 4865)
+    }
+
     /// Thrown when a value incompatible with the output format is encoded.
+    /// - Note: Emulated system error code that is first available with swift 4 and iOS 11.
     public static var coderInvalidValue: CocoaError.Code {
         return CocoaError.Code(rawValue: 4866)
     }
 
     /// Thrown when a value of a given type is requested but the encountered value is of an incompatible type.
+    /// - Note: Emulated system error code that is first available with swift 4 and iOS 11.
     public static var coderTypeMismatch: CocoaError.Code {
         return CocoaError.Code(rawValue: 4867)
     }

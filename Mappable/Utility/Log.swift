@@ -1,4 +1,3 @@
-
 //
 //  Log.swift
 //  Mappable
@@ -34,7 +33,6 @@ public class LogGlobalConfig {
     /// Global configuration for log's that under data encoding and decoding.
     public static var showCoderLog = false
 }
-
 
 /// Log's type enum.
 ///

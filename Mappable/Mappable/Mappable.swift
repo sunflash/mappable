@@ -114,7 +114,8 @@ extension Mappable {
     /// In this way, we can shape what data we want consumer to see with `propertyValues`.
     /// - Parameters:
     ///   - property: Property values that we want to remove from presentation, for example private, fileprivate, or raw properties values from json.
-    ///   - propertyInfo: Property values that we want to added to presentation, that should include computed property values which is not part of the raw `Mappable` object.
+    ///   - propertyInfo: Property values that we want to added to presentation, 
+    /// that should include computed property values which is not part of the raw `Mappable` object.
     /// - Returns: A new dictionary with some raw property values removed and some computed property values added to the presentation.
     public func adjustPropertyValues(excluded property: [String] = [""],
                                      additional propertyInfo: [String:Any] = [String: Any]()) -> [String:Any] {

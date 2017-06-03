@@ -15,11 +15,11 @@ Run **"pod install"** first time when downloaded from repo. Project won't compil
 
 Run **docs.sh** to generate documentation if you have [**Jazzy**](https://github.com/realm/jazzy) installed.
 
-## What you need implement
+## What you need to implement (It's easy.)
 
 `Mappable` object's property value.
 
-**Note:** If you don't have any property to include and exclude, just ``return propertyValuesRaw``.
+**Note:** If you don't have any property to include and/or exclude, just ``return propertyValuesRaw``.
 
 ```swift
 var propertyValues: [String: Any] {get}
@@ -29,16 +29,16 @@ var propertyValues: [String: Any] {get}
 
     public var propertyValues: [String:Any] {
     
-		// Raw property to exclude
+	// Raw property to exclude
         let excludeJsonProperty = ["productID", "itemNumber"]
 		
-		// Computed property want to includes
+	// Computed property want to includes
         var addtionalPropertyInfo = [String: Any]()
         addtionalPropertyInfo["computedPropertyA"] = self.computedPropertyA
         addtionalPropertyInfo["computedPropertyB"] = self.computedPropertyB
         addtionalPropertyInfo["computedPropertyC"] = self.computedPropertyC
 
-		// Adjust representation of propertyValues
+	// Adjust representation of propertyValues
         return adjustPropertyValues(excluded: excludeJsonProperty, additional: addtionalPropertyInfo)
     }
 

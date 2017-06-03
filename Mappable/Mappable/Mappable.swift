@@ -21,6 +21,17 @@ public protocol Mappable: Codable {
     /// Default requirement as part of the `Mappable` protocol, it's necessary when expose `Mappable` object through SDK framework.
     init()
 }
+
+extension Mappable {
+
+    /// Codable protocol decoder init
+    public init(from decoder: Decoder) throws {
+        self.init()
+    }
+
+    /// Codable protocol encoder func
+    public func encode(to encoder: Encoder) throws {}
+}
 #endif
 
 // MARK: - Mappable Property Raw Data

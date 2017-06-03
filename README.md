@@ -1,4 +1,5 @@
 # Mappable
+
 * Turbocharge swift 4 JSON codable protocol with extra functionality. (easy development, easy debugging..)
 
 * By conforming the protocol, any struct or class property values is easily accessible, essential under development and debugging process.
@@ -7,9 +8,9 @@
 
 * It's easily extendable with your own methodes through protocol extension.
 
-* Project ships with an **Swift 4 API compatible** JSON encoder and decoder, So you can start useing Swift 4 JSON encoder and decoder **Today**,  without waiting for the Swift 4 final release in Xcode 9 GM build.  Many thanks to **[Zewo's](https://github.com/Zewo) [Reflection](https://github.com/Zewo/Reflection)**.
+* Project ships with an **Swift 4 API compatible** JSON encoder and decoder, So you can start useing Swift 4 JSON encoder and decoder **Today**,  without waiting for Swift 4 final release in Xcode 9 GM build. Many thanks to **[Zewo's](https://github.com/Zewo) [Reflection](https://github.com/Zewo/Reflection)**.
 
-Run **"pod install"** first time when downloaded from repo. Project won't compile without pod properly setup. 
+Run **"pod install"** first time when downloaded from repo. Project won't compile without pod properly set up. 
 
 
 Run **docs.sh** to generate documentation if you have [**Jazzy**](https://github.com/realm/jazzy) installed.

@@ -10,6 +10,20 @@
 
 * Project ships with an **Swift 4 API compatible** JSON encoder and decoder, So you can start useing Swift 4 JSON encoder and decoder **Today**,  without waiting for Swift 4 final release in Xcode 9 GM build. Many thanks to **[Zewo's](https://github.com/Zewo) [Reflection](https://github.com/Zewo/Reflection)**.
 
+### Granular logging class that can easy print log with different level.
+
+* Can print log in different leves (warning, error, debug, info, verbose...)
+
+* Can enable and disable globally and individually per class.
+
+* Fallback to globally log config if per class log config is undefined.
+ 
+* Class log config can overriden global config settings.
+
+* Global logging methode that handle "http/api" and "encoder/decode" logs.
+
+### Installation and document gerneration
+
 Run **"pod install"** first time when downloaded from repo. Project won't compile without pod properly set up. 
 
 

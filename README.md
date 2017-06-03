@@ -49,7 +49,7 @@ var propertyValues: [String: Any] {get}
 Description of `Mappable` object, contain object name and object type info.
 
 ```swift
-public var objectInfo: String { get }
+var objectInfo: String { get }
 ```
 ### Raw information of property without computed property
 `Mappable` object property names that is not included computed property.
@@ -114,7 +114,7 @@ Adjust property values presentation for 'Mappable' object.
 In this way, we can shape what data we want consumer to see with `propertyValues`.
 
 ```swift 
-func adjustPropertyValues(excluded property: [String], additional propertyInfo: [String : Any]) -> [String : Any]
+func adjustPropertyValues(excluded property: [String] = [""], additional propertyInfo: [String:Any] = [String: Any]()) -> [String:Any]
 
 ```
 

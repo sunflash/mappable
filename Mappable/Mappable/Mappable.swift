@@ -21,6 +21,7 @@ public protocol Mappable: Codable {
     /// Default requirement as part of the `Mappable` protocol, it's necessary when expose `Mappable` object through SDK framework.
     init()
 }
+
 #endif
 
 // MARK: - Mappable Property Raw Data
@@ -71,7 +72,7 @@ extension Mappable {
         }
     }
 
-    /// `Mappable` property name value pair which is included computed property.
+    /// `Mappable` property names which is included computed property.
     public var propertyNames: [String] {
         return propertyValues.flatMap {$0.key}
     }
@@ -101,11 +102,13 @@ extension Mappable {
 
     /// Create a new property values dictionary with some property values filter out.
     ///
-    /// - Parameter property: Array of property names that should be filter out.
+    /// - Parameters: 
+    ///     - propertyToAdjust: Sepecifiy property need adjustment.
+    ///     - property: Array of property names that should be filter out.
     /// - Returns: New property values dictionary with some property values filter out.
-    private func propertyValuesRaw(excluded property: [String]) -> [String:Any] {
+    private func excludePropertyValues(propertyNeedAdjust: [String:Any], excluded property: [String]) -> [String:Any] {
         var values = [String: Any]()
-        propertyValuesRaw.filter {property.contains($0.key) == false}.forEach {values[$0.key] = $0.value}
+        propertyNeedAdjust.filter {property.contains($0.key) == false}.forEach {values[$0.key] = $0.value}
         return values
     }
 
@@ -113,13 +116,16 @@ extension Mappable {
     /// - Note: For example, we want to hide some private, fileprivate, or raw properties values from json, and added some computed property values to the representation.
     /// In this way, we can shape what data we want consumer to see with `propertyValues`.
     /// - Parameters:
+    ///   - propertyToAdjust: Sepecifiy property need adjustment, default to `propertyValuesRaw` if unspecified.
     ///   - property: Property values that we want to remove from presentation, for example private, fileprivate, or raw properties values from json.
     ///   - propertyInfo: Property values that we want to added to presentation, 
     /// that should include computed property values which is not part of the raw `Mappable` object.
     /// - Returns: A new dictionary with some raw property values removed and some computed property values added to the presentation.
-    public func adjustPropertyValues(excluded property: [String] = [""],
+    public func adjustPropertyValues(_ propertyToAdjust: [String:Any] = [String: Any](),
+                                     excluded property: [String] = [""],
                                      additional propertyInfo: [String:Any] = [String: Any]()) -> [String:Any] {
-        var values = propertyValuesRaw(excluded: property)
+        let propertyNeedAdjust = propertyToAdjust.isEmpty ? propertyValuesRaw : propertyToAdjust
+        var values = excludePropertyValues(propertyNeedAdjust: propertyNeedAdjust, excluded: property)
         values += propertyInfo
         return values
     }
@@ -254,7 +260,13 @@ extension Mappable {
     ///   - useRawValue: Flag whether what values to show, `propertyValuesRaw` or `propertyValues` with nested `Mappable` object.
     /// - Returns: Property description with optional values unwrapped.
     private func unwrappedDescription(_ value: Any, _ useRawValue: Bool) -> String {
+
+        var value = value
+
         let mirror = Mirror(reflecting: value)
+        if let style = mirror.displayStyle, style == .optional, let newValue = mirror.children.first?.value {
+            value = newValue
+        }
 
         let result = processDataInNestedStructure(type: Mappable.self, value: value) { mappable in
             let nestedValues = (useRawValue == true) ? mappable.propertyValuesRaw : mappable.propertyValues
@@ -272,9 +284,7 @@ extension Mappable {
             }
         }
 
-        guard let style = mirror.displayStyle, style == .optional else {return String(describing: value)}
-        guard let first = mirror.children.first else {return "nil"}
-        return String(describing:first.value)
+        return String(describing: value)
     }
 }
 
@@ -304,18 +314,22 @@ extension Mappable {
     ///   - useRawValue: Flag whether what values to unwrap, `propertyValuesRaw` or `propertyValues` with nested `Mappable` object.
     /// - Returns: Unwrapped property value.
     private func unwrapPropertyValue(_ value: Any, _ useRawValue: Bool) -> Any? {
+
+        var value = value
+
         let mirror = Mirror(reflecting: value)
+        if let style = mirror.displayStyle, style == .optional, let newValue = mirror.children.first?.value {
+            value = newValue
+        }
 
         let result = processDataInNestedStructure(type: Mappable.self, value: value) { mappable in
             let values = (useRawValue == true) ? mappable.propertyValuesRaw : mappable.propertyValues
             let nestedValues = unwrapPropertyValues(values, useRawValue)
             return nestedValues
         }
-
         if result.isNestedObject == true {return result.data}
 
-        guard let style = mirror.displayStyle, style == .optional else {return value}
-        return mirror.children.first?.value
+        return value
     }
 }
 

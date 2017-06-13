@@ -4,6 +4,7 @@ import Foundation
 #elseif swift(>=3)
 
 extension CocoaError.Code {
+
     /// Thrown when a value is corrupt or contain data in wrong format
     /// - Note: Emulated system error code when it's unavaiable for iOS 8.
     @available(iOS, introduced: 8.0, deprecated: 8.5)
@@ -62,18 +63,18 @@ public class JSONDecoder {
     public func decode<T: Mappable>(_ type: T.Type, from data: Data) throws -> T {
 
         guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) else {
-            logCoder(.JSONDecode, "json data is invalid")
+            logCoder(.JSONDecode, "\(type) json data is invalid")
             throw CocoaError(.coderReadCorrupt)
         }
 
         guard let jsonDict = json as? [String:Any] else {
-            logCoder(.JSONDecode, "json object is not dictionary")
+            logCoder(.JSONDecode, "\(type) json object is not dictionary")
             throw CocoaError(.coderReadCorrupt)
         }
 
         switch dateDecodingStrategy {
         case .formatted(let formatter):
-            return try type.init(dictionary: jsonDict, formatter)
+            return try type.init(type: type, dictionary: jsonDict, formatter)
         }
     }
 }

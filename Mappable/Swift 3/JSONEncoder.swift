@@ -57,7 +57,7 @@ public class JSONEncoder {
         propertyUnwrappedDataRaw = formatDateToString(propertyUnwrappedDataRaw)
 
         guard propertyUnwrappedDataRaw.isEmpty == false else {
-            logCoder(.JSONDecode, "Can't extract json data")
+            logCoder(.JSONDecode, "Can't extract json data from \(value.objectInfo)")
             throw CocoaError(.coderValueNotFound)
         }
 
@@ -67,7 +67,7 @@ public class JSONEncoder {
             let jsonData = try JSONSerialization.data(withJSONObject: propertyUnwrappedDataRaw, options: options)
             return jsonData
         } catch {
-            logCoder(.JSONEncode, "Can't serilize json data")
+            logCoder(.JSONEncode, "Can't serialize json data from \(value.objectInfo)")
             throw CocoaError(.coderInvalidValue)
         }
     }

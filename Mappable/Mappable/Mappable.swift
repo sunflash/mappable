@@ -46,6 +46,24 @@ extension Mappable {
         return values
     }
 
+    /// `Mappable` super class property name value pair that is not included computed property.
+    /// - Note: Only work with class and not sturct.
+    public var superClassPropertyValuesRaw: [String:Any] {
+
+        var values = [String: Any]()
+
+        guard let superClassMirror = Mirror(reflecting: self).superclassMirror else {
+            return values
+        }
+        let properties = superClassMirror.children
+
+        for property in properties {
+            guard let propertyName = property.label else {continue}
+            values[propertyName] = property.value
+        }
+        return values
+    }
+
     /// `Mappable` property name value pair with `Optional` value unwrapped, doesn't included computed property.
     public var propertyUnwrappedDataRaw: [String:Any] {
         return unwrapPropertyValues(propertyValuesRaw, true)
@@ -102,7 +120,7 @@ extension Mappable {
 
     /// Create a new property values dictionary with some property values filter out.
     ///
-    /// - Parameters: 
+    /// - Parameters:
     ///     - propertyToAdjust: Sepecifiy property need adjustment.
     ///     - property: Array of property names that should be filter out.
     /// - Returns: New property values dictionary with some property values filter out.
@@ -118,7 +136,7 @@ extension Mappable {
     /// - Parameters:
     ///   - propertyToAdjust: Sepecifiy property need adjustment, default to `propertyValuesRaw` if unspecified.
     ///   - property: Property values that we want to remove from presentation, for example private, fileprivate, or raw properties values from json.
-    ///   - propertyInfo: Property values that we want to added to presentation, 
+    ///   - propertyInfo: Property values that we want to added to presentation,
     /// that should include computed property values which is not part of the raw `Mappable` object.
     /// - Returns: A new dictionary with some raw property values removed and some computed property values added to the presentation.
     public func adjustPropertyValues(_ propertyToAdjust: [String:Any] = [String: Any](),

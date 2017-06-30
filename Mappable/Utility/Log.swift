@@ -30,8 +30,11 @@ public class LogGlobalConfig {
     /// Global configuration for `API` and api related log.
     public static var showAPILog = false
 
-    /// Global configuration for log's that under data encoding and decoding.
+    /// Global configuration for log's under data encoding and decoding.
     public static var showCoderLog = false
+
+    /// Global configuration for log's under database transaction.
+    public static var showDBLog = false
 }
 
 /// Log's type enum.
@@ -176,6 +179,13 @@ public func logAPI(_ type: APIType, _ url: URL, output: Any) {
     printSeparatorLine()
     print(output)
     printSeparatorLine()
+}
+
+/// Log message when doing database transaction.
+///
+/// - Parameter message: message to print to the console.
+public func logDatabase(_ message: String) {
+    print("Database:", message)
 }
 
 /// Print separator line to console.

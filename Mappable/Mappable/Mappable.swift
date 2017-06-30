@@ -336,8 +336,12 @@ extension Mappable {
         var value = value
 
         let mirror = Mirror(reflecting: value)
-        if let style = mirror.displayStyle, style == .optional, let newValue = mirror.children.first?.value {
-            value = newValue
+        if let style = mirror.displayStyle, style == .optional {
+            if let newValue = mirror.children.first?.value {
+                value = newValue
+            } else {
+                return nil
+            }
         }
 
         let result = processDataInNestedStructure(type: Mappable.self, value: value) { mappable in

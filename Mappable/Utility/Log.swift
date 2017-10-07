@@ -8,6 +8,9 @@
 
 import Foundation
 
+//-----------------------------------------------------------------------------------------------------------------
+// MARK: - Log global config
+
 /// Log's global configurations. Use to enable and disable log's globally.
 public class LogGlobalConfig {
 
@@ -36,6 +39,9 @@ public class LogGlobalConfig {
     /// Global configuration for log's under database transaction.
     public static var showDBLog = false
 }
+
+//-----------------------------------------------------------------------------------------------------------------
+// MARK: - General logging
 
 /// Log's type enum.
 ///
@@ -118,6 +124,52 @@ extension Log {
     }
 }
 
+extension Log { // Static version of the `Log` protocol extension
+
+    /// Use global `Warning` log config as default
+    public static var showWarningLog: Bool {
+        return LogGlobalConfig.showWarningLog
+    }
+    /// Use global `Error` log config as default.
+    public static var showErrorLog: Bool {
+        return LogGlobalConfig.showErrorLog
+    }
+    /// Use global `Debug` log config as default.
+    public static var showDebugLog: Bool {
+        return LogGlobalConfig.showDebugLog
+    }
+    /// Use global `Info` log config as default.
+    public static var showInfoLog: Bool {
+        return LogGlobalConfig.showInfoLog
+    }
+    /// Use global `Verbose` log config as default.
+    public static var showVerboseLog: Bool {
+        return LogGlobalConfig.showVerboseLog
+    }
+
+    /// Function to log message to console.
+    public static func log(_ type: LogType, _ message: String) {
+
+        switch type {
+        case .WARNING where (showWarningLog == true || showVerboseLog == true):
+            print("WARNING:", message)
+        case .ERROR where (showErrorLog == true || showVerboseLog == true):
+            print("ERROR:", message)
+        case .DEBUG where (showDebugLog == true || showVerboseLog == true):
+            print("DEBUG:", message)
+        case .INFO where (showInfoLog == true || showVerboseLog == true):
+            print("INFO:", message)
+        case .VERBOSE where (showVerboseLog == true):
+            print("VERBOSE:", message)
+        default:
+            break
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+// MARK: - Type specific logging
+
 /// Log type for data encoding and decoding.
 ///
 /// - `JSONEncode`: enum case for json encode.
@@ -187,6 +239,9 @@ public func logAPI(_ type: APIType, _ url: URL, output: Any) {
 public func logDatabase(_ message: String) {
     print("Database:", message)
 }
+
+//-----------------------------------------------------------------------------------------------------------------
+// MARK: - Print separator
 
 /// Print separator line to console.
 ///

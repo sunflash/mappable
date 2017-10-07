@@ -10,8 +10,6 @@ import Foundation
 
 // MARK: - Mappable Protocol
 
-#if swift(>=4)
-
 /// Mappable protocol that provides extra functionality to mapped object.
 public protocol Mappable: Codable {
 
@@ -21,8 +19,6 @@ public protocol Mappable: Codable {
     /// Default requirement as part of the `Mappable` protocol, it's necessary when expose `Mappable` object through SDK framework.
     init()
 }
-
-#endif
 
 // MARK: - Mappable Property Raw Data
 

@@ -6,6 +6,21 @@ excluded: # paths to ignore during linting. Takes precedence over `included`.
   
 opt_in_rules:
   - force_unwrapping
+  - closure_end_indentation
+  - empty_count
+  - explicit_init
+  - fatal_error_message
+  - implicit_return
+  - implicitly_unwrapped_optional
+  - multiline_parameters
+  - nimble_operator
+  - no_extension_access_modifier
+  - object_literal
+  - overridden_super_call
+  - prohibited_super_call
+  - redundant_nil_coalescing
+  - switch_case_on_newline 
+  - vertical_parameter_alignment_on_call
   
 force_unwrapping: error
 
@@ -21,12 +36,16 @@ nesting: error
 line_length: 
     warning: 170
     error: 200
+
+function_body_length:
+    warning: 70
+    error: 90
     
 type_body_length: 
-  warning: 500
-  error: 600
+    warning: 500
+    error: 600
   
 file_length:
-  warning: 750
-  error: 900
+    warning: 750
+    error: 900
   
